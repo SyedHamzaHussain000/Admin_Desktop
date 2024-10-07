@@ -18,52 +18,47 @@ import PreMedicalRecord from './main/settingInner/PreMedicalRecord';
 
 import OtpScreen from './auth/ForgetPassword/OtpScreen';
 import axios from 'axios';
-import store  from '../redux/store'
-import { Provider, useDispatch, useSelector } from 'react-redux'
+import store from '../redux/store';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/AuthSlice';
 import { useEffect, useState } from 'react';
 import { baseURL } from './utils/baseURL';
 import NewUser from './main/NewUser';
-
-  
+import ProfileDetail from './main/ProfileDetail';
+import Loader from '../components/Loader';
+import { ColorRing } from 'react-loader-spinner';
 
 function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-
-
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const loading = useSelector((state) => state.auth.loading);
 
-
-
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission
 
-
     let data = JSON.stringify({
-      "email": email,
-      "password": password,
-      "role": "Admin"
+      email: email,
+      password: password,
+      role: 'Admin',
     });
-    
+
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
       url: `${baseURL}login`,
-      headers: { 
-        'Content-Type': 'application/json', 
+      headers: {
+        'Content-Type': 'application/json',
       },
-      data : data
+      data: data,
     };
     const resultAction = await dispatch(loginUser(config));
     // const resultAction = await dispatch(loginUser({ email: email, password: password, role : "SalesOfficer" }));
 
-    console.log("resultAction", resultAction)
-  
+    console.log('resultAction', resultAction);
   };
 
   return (
@@ -140,9 +135,8 @@ function Login() {
               borderRadius: 5,
             }}
             type="email"
-            onChange={(e) => setEmail(e.target.value)} 
+            onChange={(e) => setEmail(e.target.value)}
             required
-            
           />
 
           <input
@@ -156,37 +150,61 @@ function Login() {
               marginTop: 10,
             }}
             type="password"
-            onChange={(e) => setPassword(e.target.value)} 
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
 
         <div style={{ padding: 20 }}>
-        <button
-  onClick={handleSubmit}
-  style={{
-    width: '100%',
-    height: '40px',
-    background: '#8D1F20',
-    borderRadius: '5px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s, box-shadow 0.3s',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-  }}
-  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#a13e39'} // Darken background on hover
-  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#8D1F20'} // Revert background on mouse out
-  onMouseDown={(e) => e.currentTarget.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.2)'} // Reduce shadow on click
-  onMouseUp={(e) => e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)'} // Restore shadow on release
->
-  LOGIN
-</button>
+          {
+            loading == true ?
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+            <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="color-ring-loading"
+            wrapperStyle={{}}
+            wrapperClass="color-ring-wrapper"
+            colors={['#8D1F20', '#8D1F20', '#8D1F20', '#8D1F20', '#8D1F20']}
+            />
+            </div>
+            :
+
+          <button
+            onClick={handleSubmit}
+            style={{
+              width: '100%',
+              height: '40px',
+              background: '#8D1F20',
+              borderRadius: '5px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s, box-shadow 0.3s',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = '#a13e39')
+            } // Darken background on hover
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = '#8D1F20')
+            } // Revert background on mouse out
+            onMouseDown={(e) =>
+              (e.currentTarget.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.2)')
+            } // Reduce shadow on click
+            onMouseUp={(e) =>
+              (e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)')
+            } // Restore shadow on release
+          >
+            LOGIN
+          </button>
+          }
 
           <button
             onClick={() => navigate('/EnterEmail')}
@@ -238,8 +256,8 @@ const ProtectedRoutes = () => {
         <Route path="/" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/EnterEmail" element={<EnterEmail />} />
-        <Route path="/OtpScreen" element={<OtpScreen />} />
-        <Route path="/ResetPassword" element={<ResetPassword />} />
+        <Route path="/OtpScreen/:otpmsg" element={<OtpScreen />} />
+        <Route path="/ResetPassword/:id" element={<ResetPassword />} />
       </Routes>
     );
   }
@@ -251,6 +269,7 @@ const ProtectedRoutes = () => {
       <Route path="/ClientsCallLaws" element={<ClientsCallLaws />} />
       <Route path="/PreMedicalRecord" element={<PreMedicalRecord />} />
       <Route path="/NewUser" element={<NewUser />} />
+      <Route path="/ProfileDetail/:items" element={<ProfileDetail />} />
     </Routes>
   );
 };

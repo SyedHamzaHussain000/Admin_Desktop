@@ -10,6 +10,8 @@ function AddUsers() {
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
 
+
+
   const arr = [
     {
       id: 1,
@@ -198,6 +200,7 @@ function AddUsers() {
         {AllUsers.map((e, i) => {
           return (
             <div
+            onClick={()=> navigate(`/ProfileDetail/123`,{ state: { item: e } })}
               style={{
                 marginLeft: 30,
                 padding: 20,
@@ -240,11 +243,8 @@ function AddUsers() {
 
               <div style={{ display: 'flex' }}>
                 <p style={{ fontWeight: 'bold' }}>Phone</p>
-                <p>: {e.phone}</p>
+                <p>: {e.phoneNumber}</p>
               </div>
-
-              
-
 
               <div style={{ display: 'flex' }}>
                 <p style={{ fontWeight: 'bold' }}>Email</p>

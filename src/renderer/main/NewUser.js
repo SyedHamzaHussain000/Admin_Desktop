@@ -13,6 +13,7 @@ function NewUser() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [coverImage, setCoverImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
 
@@ -23,12 +24,12 @@ function NewUser() {
   // Handlers for the text inputs
   const handleNameChange = (e) => setName(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-    // Handler for role selection
-    const handleRoleChange = (e) => {
-        setRole(e.target.value);
-      };
-    
+  // Handler for role selection
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+  };
 
   // Handler for image upload
   const handleCoverUpload = (e) => {
@@ -52,47 +53,46 @@ function NewUser() {
 
   // Submit Handler
   const handleSubmit = () => {
+    // Basic validation checks
+    if (!name.trim()) {
+      alert('Name is required');
+      return;
+    }
 
-      // Basic validation checks
-  if (!name.trim()) {
-    alert('Name is required');
-    return;
-  }
+    // Email format validation using regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim() || !emailRegex.test(email)) {
+      alert('Valid email is required');
+      return;
+    }
 
-  // Email format validation using regex
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email.trim() || !emailRegex.test(email)) {
-    alert('Valid email is required');
-    return;
-  }
+    if (!password.trim()) {
+      alert('Password is required');
+      return;
+    }
 
-  if (!password.trim()) {
-    alert('Password is required');
-    return;
-  }
+    // Ensure password is at least 6 characters
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters long');
+      return;
+    }
 
-  // Ensure password is at least 6 characters
-  if (password.length < 6) {
-    alert('Password must be at least 6 characters long');
-    return;
-  }
+    if (!profileSendingImage) {
+      alert('Profile picture is required');
+      return;
+    }
 
-  if (!profileSendingImage) {
-    alert('Profile picture is required');
-    return;
-  }
+    if (!CoverSendingImage) {
+      alert('Cover picture is required');
+      return;
+    }
 
-  if (!CoverSendingImage) {
-    alert('Cover picture is required');
-    return;
-  }
-
-    
     let data = new FormData();
     data.append('name', name);
     data.append('email', email);
     data.append('password', password);
-    data.append('role', role === "Lawfirm" ? "SalesOfficer": role);
+    data.append('phoneNumber', phone);
+    data.append('role', role === 'Lawfirm' ? 'SalesOfficer' : role);
     data.append('profilePic', profileSendingImage);
     data.append('coverPic', CoverSendingImage);
 
@@ -101,7 +101,7 @@ function NewUser() {
       maxBodyLength: Infinity,
       url: `${baseURL}register`,
       headers: {
-        'Content-Type': 'Multipart/form-data'
+        'Content-Type': 'Multipart/form-data',
       },
       data: data,
     };
@@ -188,14 +188,21 @@ function NewUser() {
               onChange={(e) => handleEmailChange(e)}
             />
             <TxtInput
+              placeHolder="Enter Phone number"
+              value={email}
+              onChange={(e) => handlePhoneChange(e)}
+            />
+            <TxtInput
               placeHolder="Enter Password"
               value={password}
               onChange={(e) => handlePasswordChange(e)}
               type="password"
             />
 
-<div style={{ marginTop: 20 }}>
-              <label htmlFor="role-select" style={{ fontSize: '16px' }}>Select Role:</label>
+            <div style={{ marginTop: 20 }}>
+              <label htmlFor="role-select" style={{ fontSize: '16px' }}>
+                Select Role:
+              </label>
               <select
                 id="role-select"
                 value={role}
@@ -212,7 +219,6 @@ function NewUser() {
                 <option value="Lawfirm">Lawfirm</option>
               </select>
             </div>
-
           </div>
 
           <div>

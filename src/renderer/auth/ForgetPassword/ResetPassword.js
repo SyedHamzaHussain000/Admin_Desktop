@@ -1,11 +1,61 @@
-import React from 'react';
-
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios'; // Make sure axios is imported
 import Logo from '../../../components/Logo';
 import photo from '../../../../assets/e.png';
+import { baseURL } from '../../utils/baseURL';
+import Loader from '../../../components/Loader';
+import { ColorRing } from 'react-loader-spinner';
 
 function ResetPassword() {
   const navigate = useNavigate();
+  const { id } = useParams(); // This gets the user id from the URL
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [loader, setLaoder] = useState(false)
+
+  console.log('id', id); // Check if the id is being received correctly
+
+  const handlePasswordReset = async (e) => {
+    // Validate password and confirm password
+
+    console.log('password', password, confirmPassword);
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    // Clear any previous errors
+    setError(null);
+    setLaoder(true)
+    let data = JSON.stringify({
+      id: id,
+      password: password,
+    });
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `${baseURL}forget-change-password`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setLaoder(false)
+        navigate("/")
+      })
+      .catch((error) => {
+        setLaoder(false)
+        console.log(error);
+      });
+  };
 
   return (
     <div
@@ -41,7 +91,6 @@ function ResetPassword() {
             objectFit: 'contain', // Make sure the image scales well
           }}
         />
-
         <h5 style={{ color: 'white', fontSize: 20 }}>
           Lorem Ipsum Simply Dummy Text
         </h5>
@@ -64,11 +113,10 @@ function ResetPassword() {
           justifyContent: 'center',
         }}
       >
-        {/* Logo here */}
         <div style={{ paddingTop: 30 }}>
           <Logo />
         </div>
-        {/* textinput div */}
+
         <div
           style={{
             padding: 20,
@@ -90,7 +138,7 @@ function ResetPassword() {
               textAlign: 'center',
             }}
           >
-            Your new password must be differently for your previous password
+            Your new password must be different from your previous password.
           </p>
           <input
             placeholder="Password"
@@ -101,7 +149,9 @@ function ResetPassword() {
               width: '90%',
               borderRadius: 5,
             }}
-            type="email"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} // Update the password state
           />
 
           <input
@@ -112,22 +162,36 @@ function ResetPassword() {
               padding: 15,
               width: '90%',
               borderRadius: 5,
-              marginTop:10
+              marginTop: 10,
             }}
-            type="email"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)} // Update the confirm password state
           />
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          ></div>
+
+          {/* Display error message */}
+          {error && <p style={{ color: 'red', marginTop: 10 }}>{error}</p>}
         </div>
+          
+          {
+            loader == true ?
+            <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+
+            <ColorRing
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={['#8D1F20', '#8D1F20', '#8D1F20', '#8D1F20', '#8D1F20']}
+              />
+                        </div>
+            :
 
         <div style={{ padding: 20 }}>
           <button
-            onClick={() => navigate('/')} // Change this to onClick
+            onClick={handlePasswordReset} // Trigger the API call on click
             style={{
               width: '100%',
               height: '40px',
@@ -141,14 +205,7 @@ function ResetPassword() {
             <p style={{ color: 'white' }}>Continue</p>
           </button>
         </div>
-
-        <div
-          style={{
-            display: 'flex',
-            padding: 20,
-            justifyContent: 'space-evenly',
-          }}
-        ></div>
+          }
       </div>
     </div>
   );
