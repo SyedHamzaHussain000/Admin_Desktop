@@ -20,15 +20,19 @@ import OtpScreen from './auth/ForgetPassword/OtpScreen';
 import axios from 'axios';
 import store from '../redux/store';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/AuthSlice';
+import { loginUser, setErrorMessage } from '../redux/AuthSlice';
 import { useEffect, useState } from 'react';
 import { baseURL } from './utils/baseURL';
 import NewUser from './main/NewUser';
 import ProfileDetail from './main/ProfileDetail';
 import Loader from '../components/Loader';
 import { ColorRing } from 'react-loader-spinner';
+// require('dotenv').config()
+// import 'dotenv/config'
+// const dotenv = require('dotenv')
+function Login () {
 
-function Login() {
+  //  dotenv.config()
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -36,10 +40,15 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const loading = useSelector((state) => state.auth.loading);
+  const isError = useSelector(state => state.auth.error)
+
+  console.log("first", isError)
+  // console.log("................................", process.env)
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission
-
+    dispatch(setErrorMessage(""))
+    
     let data = JSON.stringify({
       email: email,
       password: password,
@@ -153,6 +162,11 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {
+            isError &&
+
+          <p style={{color:'red'}}>{isError}</p>
+          }
         </div>
 
         <div style={{ padding: 20 }}>

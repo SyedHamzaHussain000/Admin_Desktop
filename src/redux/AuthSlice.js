@@ -12,7 +12,7 @@ const initialState = {
     loading: false,
     error: "",
     reportDetails: null,
-    errorMessage:""
+
 };
 
 // export const loginUser = createAsyncThunk('LoginUser', async (body) => {
@@ -63,7 +63,7 @@ const authSlice = createSlice({
         },
 
         setErrorMessage : (state, action) => {
-            state.errorMessage = action.payload
+            state.error = action.payload
         },
         logout: (state, action) => {
             state.token = null;
