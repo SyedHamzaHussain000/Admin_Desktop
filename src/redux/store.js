@@ -26,6 +26,8 @@ const saveState = (state) => {
 };
 
 // Load persisted state from localStorage
+
+//this is use for persist
 const persistedState = loadState();
 
 const store = configureStore({
