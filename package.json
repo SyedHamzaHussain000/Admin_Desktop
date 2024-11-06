@@ -97,6 +97,7 @@
   },
   "dependencies": {
     "@electron/notarize": "^2.3.2",
+    "@electron/osx-sign": "^1.3.1",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
@@ -179,7 +180,7 @@
   },
   "build": {
     "productName": "Admin",
-    "appId": "org.erb.ElectronReact",
+    "appId": "com.admin.desktopapp",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -187,21 +188,34 @@
       "node_modules",
       "package.json"
     ],
+    "afterSign": ".erb/scripts/notarize.js",
     "mac": {
-      "sign": ".erb/scripts/notarize.js",
-      "notarize": false,
+      "notarize": {
+        "teamId": "A94A7MMZCW"
+      },
+      "identity": "Mehama Kaupp (A94A7MMZCW)",
+      "provisioningProfile": "adminProv.provisionprofile",
       "target": {
-        "target": "default",
+        "target": "mas",
         "arch": [
-          "arm64",
-          "x64"
+          "universal"
         ]
       },
       "type": "distribution",
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.entertainment",
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
       "gatekeeperAssess": false
+    },
+    "mas": {
+      "type": "distribution",
+      "hardenedRuntime": false,
+      "provisioningProfile": "adminProv.provisionprofile",
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mas.inherit.plist",
+      "entitlementsLoginHelper": "assets/entitlements.mas.loginhelper.plist"
     },
     "dmg": {
       "contents": [
