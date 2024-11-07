@@ -180,7 +180,7 @@
   },
   "build": {
     "productName": "Admin",
-    "appId": "com.admin.desktopapp",
+    "appId": "com.admin.adminDesktop",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -194,7 +194,7 @@
         "teamId": "A94A7MMZCW"
       },
       "identity": "Mehama Kaupp (A94A7MMZCW)",
-      "provisioningProfile": "adminProv.provisionprofile",
+      "provisioningProfile": "AdminRealPov.provisionprofile",
       "target": {
         "target": "mas",
         "arch": [
@@ -212,7 +212,7 @@
     "mas": {
       "type": "distribution",
       "hardenedRuntime": false,
-      "provisioningProfile": "adminProv.provisionprofile",
+      "provisioningProfile": "AdminRealPov.provisionprofile",
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mas.inherit.plist",
       "entitlementsLoginHelper": "assets/entitlements.mas.loginhelper.plist"

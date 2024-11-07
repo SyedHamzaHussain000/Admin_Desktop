@@ -5,7 +5,7 @@
     <key>com.apple.developer.team-identifier</key>
     <string>A94A7MMZCW</string>
     <key>com.apple.application-identifier</key>
-    <string>A94A7MMZCW.com.admin.desktopapp</string>
+    <string>A94A7MMZCW.com.admin.adminDesktop</string>
     <key>com.apple.security.app-sandbox</key>
     <true/>
    
