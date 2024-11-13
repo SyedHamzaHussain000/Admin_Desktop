@@ -13,6 +13,7 @@ function NewUser() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [coverImage, setCoverImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
@@ -26,6 +27,7 @@ function NewUser() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleAddressChange = (e) => setAddress(e.target.value);
   // Handler for role selection
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -192,6 +194,16 @@ function NewUser() {
               value={email}
               onChange={(e) => handlePhoneChange(e)}
             />
+
+<TxtInput
+              placeHolder="Enter Address"
+              value={address}
+              onChange={(e) => handleAddressChange(e)}
+
+            />
+
+
+
             <TxtInput
               placeHolder="Enter Password"
               value={password}

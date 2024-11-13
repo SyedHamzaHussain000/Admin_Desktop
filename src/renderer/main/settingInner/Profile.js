@@ -253,7 +253,7 @@ function Profile({ onlyProfle }) {
 
       <div style={{ height: '1px', background: 'black', marginTop: 20 }} />
 
-      <div
+      {/* <div
         style={{
           display: 'flex',
           alignItems: 'flex-start',
@@ -261,14 +261,14 @@ function Profile({ onlyProfle }) {
           marginTop: 20,
         }}
       >
-        <div>
+        {/* <div>
           <p style={{ fontSize: 18, height: '10px' }}>Your Bio</p>
           <p style={{ fontSize: 14, height: '10px' }}>
             Write a short introduction
           </p>
-        </div>
+        </div> */}
 
-        <div style={{ display: 'flex' }}>
+        {/* <div style={{ display: 'flex' }}>
           <div>
             <div
               style={{
@@ -315,10 +315,10 @@ function Profile({ onlyProfle }) {
               243 characters left
             </p>
           </div>
-        </div>
+        </div> */}
 
-        <div />
-      </div>
+        {/* <div /> */}
+      {/* </div> */} 
 
       <div
         style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}

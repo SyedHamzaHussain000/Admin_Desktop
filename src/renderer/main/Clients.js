@@ -110,7 +110,7 @@ function Clients() {
       >
         <div style={{ display: 'flex' }}>
           <p style={{ fontSize: 30, fontWeight: 'bold' }}>MVS</p>
-          <p style={{ fontSize: 30, marginLeft: 10 }}>Law Firms Leads.</p>
+          <p style={{ fontSize: 30, marginLeft: 10 }}>Law Firms Potential Clients.</p>
         </div>
         <button
           onClick={() => navigate('/ClientsCallLaws')}
@@ -160,7 +160,7 @@ function Clients() {
           }}
         >
           <p style={{ color: selected == 'MyClients' ? 'white' : 'black' }}>
-              All Leads
+              All Potential Clients
           </p>
         </button>
 
@@ -305,7 +305,7 @@ function Clients() {
                 maxWidth: '200px'
               }}
             >
-              <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Joye Law Firm Lead</p>
+              <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Potential Clients</p>
               <p>{e.firstName} {e.lastName}</p> {/* Assuming lastName is available */}
           
               <hr style={{ width: '100%', border: '0.5px solid #ccc' }} />
@@ -322,7 +322,7 @@ function Clients() {
           :
           <div style={{display:'flex',  }}>
 
-          <p>No Lead Found</p>
+          <p>No Potential Clients Found</p>
           </div>
         }
           </>

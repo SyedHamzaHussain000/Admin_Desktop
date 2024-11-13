@@ -39,7 +39,7 @@ function ProfileDetail() {
             <img src={`${baseURL}public/Profiles/${item.profilePic}`}   style={{height:100, width:100, borderRadius:200}}  />
             <p>Name: {item.name}</p>
             <p>Email: {item.email}</p>
-            <p>Bio: {item.bio}</p>
+            {/* <p>Bio: {item.bio}</p> */}
         </div>  
       </div>
     </div>

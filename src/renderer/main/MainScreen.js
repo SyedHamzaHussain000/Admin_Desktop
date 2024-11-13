@@ -180,7 +180,7 @@ const MainScreen = () => {
                   color: selectedButton == 'Profile' ? 'white' : 'black',
                 }}
               >
-                LAW FIRM PROFILE
+                Profiles
               </p>
             </button>
 
@@ -234,7 +234,7 @@ const MainScreen = () => {
                   color: selectedButton == 'Client' ? 'white' : 'black',
                 }}
               >
-                ALL LEADS
+                potential clients
               </p>
             </button>
 

@@ -252,7 +252,7 @@ function Reports() {
                   }}
                 >
                   <p style={{ fontSize: '20px', fontWeight: 'bold' }}>
-                    Joye Law Firm Lead
+                    Joye Law Firm Potential Clients
                   </p>
                   <p>
                     {e.firstName} {e.lastName}
