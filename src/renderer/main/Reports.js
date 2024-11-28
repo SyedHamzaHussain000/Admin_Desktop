@@ -255,14 +255,16 @@ function Reports() {
                     Joye Law Firm Potential Clients
                   </p>
                   <p>
-                    {e.firstName} {e.lastName}
+                    {e.callAttempt}/10
                   </p>
-
+                  <p>
+                  status ({e.status})
+                  </p>
                   <hr style={{ width: '100%', border: '0.5px solid #ccc' }} />
 
                   <div style={{ textAlign: 'left', width: '100%' }}>
                     <p>
-                      <strong>Name:</strong> {e.firstName} {e.lastName}
+                      <strong>Name:</strong> {e.callername} 
                     </p>
                     <p>
                       <strong>Phone:</strong> {e.primaryPhone}

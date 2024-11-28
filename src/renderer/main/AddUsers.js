@@ -198,6 +198,7 @@ function AddUsers() {
         }}
       >
         {AllUsers.map((e, i) => {
+          console.log("e",e)
           return (
             <div
             onClick={()=> navigate(`/ProfileDetail/123`,{ state: { item: e } })}
@@ -240,11 +241,11 @@ function AddUsers() {
                 <p style={{ fontWeight: 'bold' }}>Name</p>
                 <p>: {e.name}</p>
               </div>
-
+{/* 
               <div style={{ display: 'flex' }}>
                 <p style={{ fontWeight: 'bold' }}>Phone</p>
-                <p>: {e.phoneNumber}</p>
-              </div>
+                <p style={{color:'black'}}>: {e.phoneNumber}</p>
+              </div> */}
 
               <div style={{ display: 'flex' }}>
                 <p style={{ fontWeight: 'bold' }}>Email</p>

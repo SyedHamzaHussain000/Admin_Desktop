@@ -234,7 +234,7 @@ const MainScreen = () => {
                   color: selectedButton == 'Client' ? 'white' : 'black',
                 }}
               >
-                potential clients
+                potential client
               </p>
             </button>
 

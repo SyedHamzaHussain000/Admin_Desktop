@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../utils/baseURL';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Loader from '../../components/Loader';
 import { CirclesWithBar, ThreeDots } from 'react-loader-spinner';
+import { setReportsDetail } from '../../redux/AuthSlice';
 
 function Clients() {
   const [selected, setSelected] = useState('MyClients');
@@ -12,7 +13,7 @@ function Clients() {
 
   const [myLead, setMyLead] = useState([]);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
@@ -290,7 +291,10 @@ function Clients() {
           myLead.map((e, i) => (
             <div 
               key={i} // Unique key for each item
-              onClick={() => navigate('/PreMedicalRecord')} // Handling navigation
+              onClick={() => { 
+                dispatch(setReportsDetail(e)),
+                navigate('/PreMedicalRecord')
+              }} // Handling navigation
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -306,12 +310,13 @@ function Clients() {
               }}
             >
               <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Potential Clients</p>
-              <p>{e.firstName} {e.lastName}</p> {/* Assuming lastName is available */}
+              <p>{e.callername}</p> {/* Assuming lastName is available */}
           
               <hr style={{ width: '100%', border: '0.5px solid #ccc' }} />
           
               <div style={{ textAlign: 'left', width: '100%' }}>
-                <p><strong>Name:</strong> {e.firstName} {e.lastName}</p>
+                <p><strong>Name:</strong> {e.callername}</p>
+          
                 <p><strong>Phone:</strong> {e.primaryPhone}</p>
                 <p><strong>Alt. Phone:</strong> {e.secondaryPhone}</p>
                 <p><strong>Best Time to Reach:</strong> {e.timeToReach}</p>
