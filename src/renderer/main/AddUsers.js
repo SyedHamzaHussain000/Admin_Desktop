@@ -170,8 +170,8 @@ function AddUsers() {
     >
       <div style={{ display: 'flex', justifyContent:'space-between', alignItems:'center' }}>
         <div style={{ display: 'flex' }}>
-          <p style={{ fontSize: 30, fontWeight: 'bold' }}>MVS</p>
-          <p style={{ fontSize: 30, marginLeft: 10 }}>Law Firms Profiles</p>
+          {/* <p style={{ fontSize: 30, fontWeight: 'bold' }}>MVS</p> */}
+          <p style={{ fontSize: 30, marginLeft: 10 }}>Law Firm Profiles</p>
         </div>
 
         <button onClick={()=> navigate('/NewUser')} style={{height:40, background:'#8D1F20', width:100, borderRadius:100, borderWidth:0}}>

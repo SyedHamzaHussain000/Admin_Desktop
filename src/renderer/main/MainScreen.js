@@ -17,6 +17,9 @@ import AddUsers from './AddUsers';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/AuthSlice';
 import { baseURL } from '../utils/baseURL';
+import Pending from './Pending';
+import Aborted from './Aborted';
+import Completed from './Completed';
 
 const MainScreen = () => {
   const navigate = useNavigate();
@@ -180,7 +183,7 @@ const MainScreen = () => {
                   color: selectedButton == 'Profile' ? 'white' : 'black',
                 }}
               >
-                Profiles
+                PROFILES
               </p>
             </button>
 
@@ -207,7 +210,7 @@ const MainScreen = () => {
                   color: selectedButton == 'AddUsers' ? 'white' : 'black',
                 }}
               >
-                LF PROFILES
+                LAW FIRM PROFILES
               </p>
             </button>
 
@@ -234,11 +237,11 @@ const MainScreen = () => {
                   color: selectedButton == 'Client' ? 'white' : 'black',
                 }}
               >
-                potential client
+                POTENTIAL CLIENTS
               </p>
             </button>
 
-            <button
+            {/* <button
               onClick={() => buttonPress('REPORTS')}
               style={{
                 width: '100%',
@@ -262,6 +265,90 @@ const MainScreen = () => {
                 }}
               >
                 REPORTS
+              </p>
+            </button> */}
+
+            <button
+              onClick={() => buttonPress('PENDING')}
+              style={{
+                width: '100%',
+                display: 'flex',
+                borderRadius: 10,
+                borderWidth: 0,
+                alignItems: 'center',
+                marginTop: 10,
+                background: selectedButton == 'PENDING' ? '#8D1F20' : null,
+              }}
+            >
+              <img
+                src={report_icon}
+                style={{ objectFit: 'contain', height: '50px', width: '50px' }}
+              />
+              <p
+                style={{
+                  fontSize: 14,
+                  marginLeft: 10,
+                  color: selectedButton == 'PENDING' ? 'white' : 'black',
+                }}
+              >
+                PENDING
+              </p>
+            </button>
+
+
+            <button
+              onClick={() => buttonPress('ABORTED')}
+              style={{
+                width: '100%',
+                display: 'flex',
+                borderRadius: 10,
+                borderWidth: 0,
+                alignItems: 'center',
+                marginTop: 10,
+                background: selectedButton == 'ABORTED' ? '#8D1F20' : null,
+              }}
+            >
+              <img
+                src={report_icon}
+                style={{ objectFit: 'contain', height: '50px', width: '50px' }}
+              />
+              <p
+                style={{
+                  fontSize: 14,
+                  marginLeft: 10,
+                  color: selectedButton == 'ABORTED' ? 'white' : 'black',
+                }}
+              >
+                ABORTED
+              </p>
+            </button>
+
+
+
+            <button
+              onClick={() => buttonPress('COMPLETED')}
+              style={{
+                width: '100%',
+                display: 'flex',
+                borderRadius: 10,
+                borderWidth: 0,
+                alignItems: 'center',
+                marginTop: 10,
+                background: selectedButton == 'COMPLETED' ? '#8D1F20' : null,
+              }}
+            >
+              <img
+                src={report_icon}
+                style={{ objectFit: 'contain', height: '50px', width: '50px' }}
+              />
+              <p
+                style={{
+                  fontSize: 14,
+                  marginLeft: 10,
+                  color: selectedButton == 'COMPLETED' ? 'white' : 'black',
+                }}
+              >
+                COMPLETED
               </p>
             </button>
 
@@ -329,8 +416,16 @@ const MainScreen = () => {
           <Setting />
         ) : selectedButton == 'Client' ? (
           <Clients />
-        ) : selectedButton == 'REPORTS' ? (
-          <Reports />
+        ) 
+        // : selectedButton == 'REPORTS' ? (
+        //   <Reports />
+        // ) 
+        : selectedButton == "PENDING" ? (
+          <Pending />
+        ): selectedButton == "ABORTED" ? (
+          <Aborted />
+        ): selectedButton == "COMPLETED" ? (
+          <Completed />
         ) : null}
       </div>
     </div>

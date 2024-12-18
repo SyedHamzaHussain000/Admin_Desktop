@@ -284,11 +284,12 @@ function Clients() {
           <>
           {
            
-           myLead.length > 0 ?
+           myLead?.length > 0 ?
 
            
            
-          myLead.map((e, i) => (
+          myLead?.map((e, i) => (
+
             <div 
               key={i} // Unique key for each item
               onClick={() => { 
@@ -309,8 +310,12 @@ function Clients() {
                 maxWidth: '200px'
               }}
             >
+              {
+                console.log("first.....", e)
+              }
               <p style={{ fontSize: '20px', fontWeight: 'bold' }}>Potential Clients</p>
-              <p>{e.callername}</p> {/* Assuming lastName is available */}
+
+              <p>{e.callAttempt}/10</p>
           
               <hr style={{ width: '100%', border: '0.5px solid #ccc' }} />
           
