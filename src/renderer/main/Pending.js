@@ -278,6 +278,25 @@ function Pending() {
                   </p>
                 </div>
 
+                <hr style={{ width: '100%', border: '0.5px solid #ccc' }} />
+                <p style={{fontWeight:'bold'}}>Nurse Detail</p>
+                {
+                    e?.NurseId ? 
+
+                <div style={{ textAlign: 'left', width: '100%' }}>
+                <p>
+                 <strong>name:</strong> {e?.NurseId?.name}
+                </p>
+
+                <p>
+                 <strong>email:</strong> {e?.NurseId?.email}
+                </p>
+                
+                </div>
+                :
+                <p>No Intake</p>
+                }
+
                 <button
                   onClick={() => {
                     dispatch(setReportsDetail(e)),
